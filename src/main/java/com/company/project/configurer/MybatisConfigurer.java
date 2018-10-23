@@ -44,7 +44,7 @@ public class MybatisConfigurer {
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+        factory.setMapperLocations(resolver.getResources("classpath:xmlMappers/*.xml"));
         return factory.getObject();
     }
 
@@ -52,7 +52,9 @@ public class MybatisConfigurer {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-        mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
+        //mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
+        // 扫描mapper接口
+        mapperScannerConfigurer.setBasePackage("com.company.project.modules.*.mapper");
 
         //配置通用Mapper，详情请查阅官方文档
         Properties properties = new Properties();
